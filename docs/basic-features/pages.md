@@ -218,15 +218,15 @@ Static Generation은 다음과 같은 페이지에 사용될 수 있습니다:
 페이지내 일부를 프리 렌더링 하지 않고, client-side 자바스크립트를 활용하여 내용을 채웁니다 (populate). 해당 방법에 대한 자세한 내용은 [Data Fetching documentation](/docs/basic-features/data-fetching/client-side.md)을 참고할 수 있습니다.
 - **Server-Side Rendering을 사용합니다:** Next.js는 각각의 요청에 따른 프리 렌더링을 진행합니다. 이러한 과정 중 페이지는 CDN에 의해 캐시되지 않기 때문에 시간이 걸리지만, 프리 렌더링된 페이지들은 항상 최신 업데이트인 상태를 유지합니다. 해당 방법은 하단에서 알아볼 수 있습니다.  
 
-## Server-side Rendering (서버 사이드 렌더링)
+## 서버 사이드 렌더링 (Server-side Rendering)
 
->  "SSR" 또는 "Dynamic Rendering"라고 불리우기도 합니다.
+> "SSR" 또는 "동적 렌더링(Dynamic Rendering)"라고 불리우기도 합니다.
 
 페이지에서 **Server-side Rendering**이 사용되는 것은 각각의 요청에 따라 HTML이 생성된다는 뜻입니다.  
 
-Server-side Rendering을 페이지에 적용하려면, `async` 함수인 `getServerSideProps`를 내보내어야(`export`) 합니다. 서버는 요청이 들어올 때마다 해당 함수를 호출합니다.  
+Server-side Rendering을 페이지에 적용하려면, `async` 함수인 `getServerSideProps`를 내보내야(`export`) 합니다. 서버는 요청이 들어올 때마다 해당 함수를 호출합니다.  
 
-예를 들어 외부 API로 부터 자주 업데이트 되는 데이터에 대한 프리 렌더링이 필요한 경우,  `getServerSideProps`를 사용하여 데이터를 가져오고, 다음과 같이 `Page`로 전달할 수 있습니다:   
+예를 들어 외부 API로 부터 자주 업데이트 되는 데이터에 대한 사전 렌더링 (pre-rendering)이 필요한 경우,  `getServerSideProps`를 사용하여 데이터를 가져오고, 다음과 같이 `Page`로 전달할 수 있습니다:   
 
 ```jsx
 function Page({ data }) {
@@ -246,15 +246,15 @@ export async function getServerSideProps() {
 export default Page
 ```
 
-`getServerSideProps`은 `getStaticProps`과 유사하나, 빌드타임이 아닌 요청에 따라 실행된다는 점에서 상이합니다.  
+`getServerSideProps`은 `getStaticProps`과 유사하나, 빌드 시점이 아닌 요청에 따라 실행된다는 점에서 다릅니다.  
 
 `getServerSideProps`에 대한 더욱 자세한 내용은 [Data Fetching documentation](/docs/basic-features/data-fetching/get-server-side-props.md)을 참고하세요. 
 
 ## 요약
 
-Next.js 내에서 프리 렌더링을 진행하는 두 가지 방법을 알아보았습니다.
+Next.js 내에서 사전 렌더링을 진행하는 두 가지 방법을 알아보았습니다.
 
-- **Static Generation (권장):** HTML이 **빌드 타임**에 만들어지며 각 요청마다 재사용됩니다. Static Generation을 활용하여 페이지를 제작하기 위해서는, 페이지 컴포넌트를 내보내거나 `getStaticProps`를 내보냅니다 (필요에따라 `getStaticPaths`도 활용합니다). 유저의 요청 전에 프리 렌더링이 진행되어야 하는 페이지들에 적합합니다. 추가 데이터를 가져오기 위해 Client-side Rendering과 함께 사용될 수 있습니다. 
+- **Static Generation (권장):** HTML이 **빌드 시점**에 만들어지며 각 요청마다 재사용됩니다. Static Generation을 활용하여 페이지를 제작하기 위해서는, 페이지 컴포넌트를 내보내거나 `getStaticProps`를 내보냅니다 (필요에따라 `getStaticPaths`도 활용합니다). 유저의 요청 전에 프리 렌더링이 진행되어야 하는 페이지들에 적합합니다. 추가 데이터를 가져오기 위해 Client-side Rendering과 함께 사용될 수 있습니다. 
 
 - **Server-side Rendering:** **요청이 들어올 때마다** HTML을 생성합니다. Server-side Rendering을 사용하는 페이지를 만들기 위해서는, `getServerSideProps`를 내보냅니다. 퍼포먼스의 측면에서 Server-side Rendering이 Static Generation보다 열등하기 때문에 꼭 필요할때만 사용하는 것을 권장합니다.
 
@@ -285,7 +285,7 @@ Next.js 내에서 프리 렌더링을 진행하는 두 가지 방법을 알아�
 
 <div class="card">
   <a href="/docs/basic-features/typescript.md#pages">
-    <b>타입스크립트t:</b>
+    <b>타입스크립트:</b>
     <small>페이지에 타입스크립트 추가하기.</small>
   </a>
 </div>
