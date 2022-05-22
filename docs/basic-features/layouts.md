@@ -11,7 +11,7 @@ description: Learn how to share components and state between Next.js pages with 
   </ul>
 </details>
 
-The React model allows us to deconstruct a [page](/docs/basic-features/pages.md) into a series of components. Many of these components are often reused between pages. For example, you might have the same navigation bar and footer on every page.
+React 모델은 우리가 하나의 [페이지](/docs/basic-features/pages.md)를 여러 컴포넌트로 분해할 수 있도록 해 줍니다. 이 컴포넌트들 중 다수는 페이지 사이에서 재사용됩니다. 예를 들어, 모든 페이지에서 동일한 네비게이션 바와 푸터를 사용할 수 있습니다.
 
 ```jsx
 // components/layout.js
@@ -30,11 +30,11 @@ export default function Layout({ children }) {
 }
 ```
 
-## Examples
+## 예제
 
-### Single Shared Layout with Custom App
+### 커스텀 앱에서 하나의 레이아웃을 공유하는 경우
 
-If you only have one layout for your entire application, you can create a [Custom App](/docs/advanced-features/custom-app.md) and wrap your application with the layout. Since the `<Layout />` component is re-used when changing pages, its component state will be preserved (e.g. input values).
+애플리케이션 전체에 단 하나의 레이아웃만 있다면, [커스텀 앱](/docs/advanced-features/custom-app.md)을 만들어 애플리케이션을 해당 레이아웃으로 감쌀 수 있습니다. `<Layout />` 컴포넌트는 페이지가 바뀔 때 재사용되기 때문에, 컴포넌트 상태(예: input 값들)는 유지될 것입니다.
 
 ```jsx
 // pages/_app.js
@@ -50,9 +50,9 @@ export default function MyApp({ Component, pageProps }) {
 }
 ```
 
-### Per-Page Layouts
+### 페이지 단위 레이아웃
 
-If you need multiple layouts, you can add a property `getLayout` to your page, allowing you to return a React component for the layout. This allows you to define the layout on a _per-page basis_. Since we're returning a function, we can have complex nested layouts if desired.
+다양한 레이아웃이 필요하다면, `getLayout` 속성을 페이지에 추가해 레이아웃을 위한 React 컴포넌트를 리턴하도록 할 수 있습니다. 이로 인해 _페이지 단위_로 레이아웃을 정의할 수 있습니다. 함수를 리턴하고 있기 때문에, 원한다면 복잡한 중첩 레이아웃을 만들 수도 있습니다.
 
 ```jsx
 // pages/index.js
@@ -86,15 +86,15 @@ export default function MyApp({ Component, pageProps }) {
 }
 ```
 
-When navigating between pages, we want to *persist* page state (input values, scroll position, etc.) for a Single-Page Application (SPA) experience.
+페이지를 이동할 때, 우리는 싱글 페이지 애플리케이션 (SPA) 경험을 제공하기 위해 페이지 상태(input 값, 스크롤 위치 등)를 *유지*하고 싶습니다.
 
-This layout pattern enables state persistence because the React component tree is maintained between page transitions. With the component tree, React can understand which elements have changed to preserve state.
+이 레이아웃 패턴은 상태를 지속할 수 있게 하는데, 페이지 전환 시 React 컴포넌트 트리가 관리되기 때문입니다. 컴포넌트 트리를 통해 React에서 상태를 유지하기 위해 어떤 요소가 변경되었는지 알 수 있습니다.
 
-> **Note**: This process is called [reconciliation](https://reactjs.org/docs/reconciliation.html), which is how React understands which elements have changed.
+> **주의**: 이 과정은 [재조정](https://reactjs.org/docs/reconciliation.html)이라고 하며, React는 이 과정을 통해 어떤 요소들이 바뀌었는지 이해합니다.
 
-### With TypeScript
+### TypeScript 사용 시
 
-When using TypeScript, you must first create a new type for your pages which includes a `getLayout` function. Then, you must create a new type for your `AppProps` which overrides the `Component` property to use the previously created type.
+TypeScript를 사용할 때, 페이지에서 먼저 `getLayout` 함수를 포함하는 새로운 타입을 생성해야 합니다. 그 다음에, 이전에 만든 타입을 사용하기 위해 `Component` 속성을 오버라이딩하는 `AppProps`에서 사용할 새로운 타입을 생성해야 합니다.
 
 ```tsx
 // pages/index.tsx
@@ -141,9 +141,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 }
 ```
 
-### Data Fetching
+### 데이터 Fetching
 
-Inside your layout, you can fetch data on the client-side using `useEffect` or a library like [SWR](https://swr.vercel.app/). Because this file is not a [Page](/docs/basic-features/pages.md), you cannot use `getStaticProps` or `getServerSideProps` currently.
+레이아웃 내에서 `useEffect` 또는 [SWR](https://swr.vercel.app/)과 같은 라이브러리를 사용하여 클라이언트 사이드에서 데이터를 fetch할 수 있습니다. 이 파일은 [페이지](/docs/basic-features/pages.md)가 아니기 때문에, 현재로서는 `getStaticProps` 또는 `getServerSideProps`를 사용할 수 없습니다.
 
 ```jsx
 // components/layout.js
@@ -168,18 +168,18 @@ export default function Layout({ children }) {
 }
 ```
 
-For more information on what to do next, we recommend the following sections:
+다음으로 무엇을 해야 하는지에 대해 더 알고 싶으시다면, 다음의 섹션을 추천드립니다:
 
 <div class="card">
   <a href="/docs/basic-features/pages.md">
     <b>Pages:</b>
-    <small>Learn more about what pages are in Next.js.</small>
+    <small>Next.js에서 페이지란 무엇인지에 대해 더 알아보세요.</small>
   </a>
 </div>
 
 <div class="card">
   <a href="/docs/advanced-features/custom-app.md">
     <b>Custom App:</b>
-    <small>Learn more about how Next.js initialize pages.</small>
+    <small>Next.js가 어떻게 페이지를 초기화하는지에 대해 더 알아보세요.</small>
   </a>
 </div>
