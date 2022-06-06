@@ -22,11 +22,9 @@ This is possible because Next.js extends the concept of [`import`](https://devel
 ## Adding a Global Stylesheet
 
 애플리케이션에 스타일 시트를 추가하려면, `pages/_app.js` 내에 CSS 파일을 불러오십시오.
-
 To add a stylesheet to your application, import the CSS file within `pages/_app.js`.
 
 예를 들어, 다음과 같은 `styles.css`라는 스타일 시트를 추가한다고 가정해 보겠습니다.
-
 For example, consider the following stylesheet named `styles.css`:
 
 ```css
@@ -64,9 +62,11 @@ Due to the global nature of stylesheets, and to avoid conflicts, you may **only 
 
 In development, expressing stylesheets this way allows your styles to be hot reloaded as you edit them—meaning you can keep application state.
 
+
 실제 제품에서, 모든 CSS 파일은 자동으로 축소된 하나의 `.css` 파일로 연결됩니다.
 
 In production, all CSS files will be automatically concatenated into a single minified `.css` file.
+
 
 ### `node_modules`로부터 스타일 불러오기
 ### Import styles from `node_modules`
@@ -74,6 +74,7 @@ In production, all CSS files will be automatically concatenated into a single mi
 Next.js 9.5.4 버전부터는 `node_modules`에서 CSS 파일을 불러오는 것이 애플리케이션 어디에서든 허용됩니다.
 
 Since Next.js **9.5.4**, importing a CSS file from `node_modules` is permitted anywhere in your application.
+
 
 `bootstrap` 또는 `nprogress`와 같은 전역적 스타일 시트의 경우, `pages/_app.js` 내에서 파일을 불러와야 합니다.
 예를 들어:
@@ -129,11 +130,13 @@ Next.js는 `[name].module.css` 파일 네이밍 컨벤션을 사용하여 [CSS �
 
 Next.js supports [CSS Modules](https://github.com/css-modules/css-modules) using the `[name].module.css` file naming convention.
 
+
 CSS 모듈은 고유한 클래스 이름을 자동으로 생성하여 CSS의 범위를 로컬로 지정합니다.
 이렇게 하면 충돌에 대한 걱정 없이 다른 파일에서 동일한 CSS 클래스 이름을 사용할 수 있습니다.
 
 CSS Modules locally scope CSS by automatically creating a unique class name.
 This allows you to use the same CSS class name in different files without worrying about collisions.
+
 
 // behavior?
 이러한 특성 때문에 CSS 모듈은 컴포넌트 레벨 CSS를 포함하는 이상적인 방법입니다.
@@ -142,9 +145,11 @@ CSS 모듈 파일은 **애플리케이션의 어느 곳에서나 가져올 수 �
 This behavior makes CSS Modules the ideal way to include component-level CSS.
 CSS Module files **can be imported anywhere in your application**.
 
+
 예를 들어, `components/` 폴더 내의 재사용 가능한 `Button` 컴포넌트를 가정해 보겠습니다.
 
 For example, consider a reusable `Button` component in the `components/` folder:
+
 
 첫째로, 다음 내용과 함께 `components/Button.module.css`를 생성합니다.
 
@@ -162,7 +167,6 @@ You do not need to worry about .error {} colliding with any other `.css` or
 ```
 
 다음으로, 위의 CSS 파일을 불러와서 사용하는 `components/Button.js`를 생성합니다.
-
 Then, create `components/Button.js`, importing and using the above CSS file:
 
 ```jsx
@@ -188,12 +192,14 @@ CSS 모듈은 _선택적 기능_이며 **`.module.css` 확장자로 끝나는 �
 CSS Modules are an _optional feature_ and are **only enabled for files with the `.module.css` extension**.
 Regular `<link>` stylesheets and global CSS files are still supported.
 
+
 실제 제품에서, 모든 CSS 모듈 파일은 자동으로 축소 및 코드 분할된 여러 개의 `.css` 파일로 연결됩니다.
 이 `.css` 파일들은 애플리케이션의 hot execution path를 나타내므로, 애플리케이션이 페인트(paint) 할 수 있는 최소한의 CSS가 로딩되는 것을 보장합니다.
 // ???????? We need John..
 
 In production, all CSS Module files will be automatically concatenated into **many minified and code-split** `.css` files.
 These `.css` files represent hot execution paths in your application, ensuring the minimal amount of CSS is loaded for your application to paint.
+
 
 ## Sass 지원
 ## Sass Support
@@ -204,6 +210,7 @@ CSS 모듈과 `.module.scss` 또는 `.module.sass` 확장자 파일을 통해 �
 Next.js allows you to import Sass using both the `.scss` and `.sass` extensions.
 You can use component-level Sass via CSS Modules and the `.module.scss` or `.module.sass` extension.
 
+
 Next.js의 빌트인 Sass 지원을 사용하기 전에, [`sass`](https://github.com/sass/sass)를 설치했는지 확인하십시오:
 
 Before you can use Next.js' built-in Sass support, be sure to install [`sass`](https://github.com/sass/sass):
@@ -213,7 +220,6 @@ npm install --save-dev sass
 ```
 
 Sass 지원은 위에서 서술한 빌트인 CSS 지원과 같은 이점과 제한이 있습니다.
-
 Sass support has the same benefits and restrictions as the built-in CSS support detailed above.
 
 > **주의**: Sass는 [두개의 다른 문법](https://sass-lang.com/documentation/syntax)을 지원합니다.
@@ -233,11 +239,9 @@ Sass support has the same benefits and restrictions as the built-in CSS support 
 ### Customizing Sass Options
 
 Sass 컴파일러를 정의하고 싶다면 `next.config.js` 내에 `sassOptions`을 사용하면 됩니다.
-
 If you want to configure the Sass compiler you can do so by using `sassOptions` in `next.config.js`.
 
 `includePaths`를 추가하는 예시입니다:
-
 For example to add `includePaths`:
 
 ```js
@@ -254,11 +258,9 @@ module.exports = {
 ### Sass Variables
 
 Next.js는 CSS 모듈 파일에서 내보낸 Sass 변수를 지원합니다.
-
 Next.js supports Sass variables exported from CSS Module files.
 
 내보낸 `primaryColor` Sass 변수를 사용하는 예제:
-
 For example, using the exported `primaryColor` Sass variable:
 
 ```scss
@@ -283,8 +285,6 @@ export default function MyApp({ Component, pageProps }) {
 }
 ```
 
-// 번역을 할지 말지
-
 ## CSS-in-JS
 
 <details>
@@ -304,7 +304,7 @@ export default function MyApp({ Component, pageProps }) {
 </details>
 
 
-기존 CSS-in-JS 솔루션 어떤 것이든 사용할 수 있스빈다.
+기존 CSS-in-JS 솔루션 어떤 것이든 사용할 수 있습니다.
 가장 간단한 예시는 인라인 스타일입니다:
 
 It's possible to use any existing CSS-in-JS solution.
@@ -366,7 +366,6 @@ export default HelloWorld
 ```
 
 더 많은 예시는 [styled-jsx 문서](https://github.com/vercel/styled-jsx)를 참조하세요.
-
 Please see the [styled-jsx documentation](https://github.com/vercel/styled-jsx) for more examples.
 
 ## FAQ
